@@ -8,6 +8,6 @@ import com.novinet.model.Invitee;
 
 public interface InviteeRepository extends CrudRepository<Invitee, Long> {
 
-	List<Invitee> findByName(String name);
+	List<Invitee> findByGuestNames(String guestNames);
 	
 }
