@@ -1,13 +1,8 @@
 package com.novinet.repository;
 
-import java.util.List;
-
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
-import com.novinet.model.Invitee;
-
+@RepositoryRestResource
 public interface InviteeRepository extends CrudRepository<Invitee, Long> {
-
-	List<Invitee> findByGuestNames(String guestNames);
-	
 }

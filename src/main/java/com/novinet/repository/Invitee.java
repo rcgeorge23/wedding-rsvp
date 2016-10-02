@@ -1,4 +1,4 @@
-package com.novinet.model;
+package com.novinet.repository;
 
 import static org.apache.commons.lang3.builder.ToStringBuilder.reflectionToString;
 
@@ -18,6 +18,8 @@ public class Invitee {
 	private int numberOfGuests;
 	private String foodPreferences;
 	private String emailAddress;
+	
+	private String code;
 	
 	protected Invitee() {
 	}
@@ -68,5 +70,13 @@ public class Invitee {
 	@Override
 	public String toString() {
 		return reflectionToString(this);
+	}
+
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
 	}
 }

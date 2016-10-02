@@ -5,8 +5,8 @@ angular.module('rsvp', []).controller('HomeController', function($scope, $http) 
 
 	$scope.submitForm = function() {
 		$http({
-			method : 'PUT',
-			url : '/invitee/register',
+			method : 'POST',
+			url : '/invitees',
 			data : $scope.formData
 		}).success(function(data) {
 			console.log(data);

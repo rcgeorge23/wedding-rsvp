@@ -1,0 +1,2 @@
+heroku deploy:jar ./target/rsvp-0.0.1-SNAPSHOT.jar --app ancient-cliffs-87771
+heroku logs --tail --app ancient-cliffs-87771
