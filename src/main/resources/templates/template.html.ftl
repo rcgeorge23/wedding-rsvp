@@ -5,6 +5,8 @@
 		<script src="/js/angular.min.js"></script>
 		<script src="/js/ui-bootstrap-tpls-2.1.4.min.js"></script>
 	</head>
-	<#nested />
+	<body ng-app="rsvp" ng-cloak> 
+		<#nested />
+	</body>
 </html>
 </#macro>

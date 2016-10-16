@@ -1,6 +1,6 @@
 <#import "template.html.ftl" as t />
 <@t.page title="custom page title">
-	<body ng-app="rsvp" ng-controller="HomeController as homeController" ng-cloak>
+	<div ng-controller="HomeController as homeController">
 		<form class="form-horizontal" ng-submit="homeController.submitForm()">
 			<fieldset>
 				<legend>RSVP</legend>
@@ -51,5 +51,5 @@
 		</form>
 		<pre>{{ homeController.formData }}</pre>
 		<script src="/js/controllers/HomeController.js"></script>
-	</body>
+	</div>
 </@t.page>
