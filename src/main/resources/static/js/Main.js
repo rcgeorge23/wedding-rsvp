@@ -1,1 +1,1 @@
-angular.module('myModule', [ 'ui.bootstrap' ]);
+angular.module('rsvp', ['ui.bootstrap', 'smart-table']);

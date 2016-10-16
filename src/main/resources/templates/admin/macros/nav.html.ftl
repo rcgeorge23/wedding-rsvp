@@ -5,7 +5,7 @@
 				<button class="btn btn-default" id="showLeft">
 					<i class="fa fa-bars" aria-hidden="true"></i>
 				</button>
-			</form> 			
+			</form> 	
 		</div>
 		<a href="#" class="navbar-brand pull-right">${title}</a> 
 	</nav>
