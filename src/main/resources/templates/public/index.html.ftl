@@ -1,4 +1,4 @@
-<#import "template.html.ftl" as t />
+<#import "macros/template.html.ftl" as t />
 <@t.page title="custom page title">
 	<div ng-controller="HomeController as homeController">
 		<form class="form-horizontal" ng-submit="homeController.submitForm()">
@@ -51,5 +51,5 @@
 		</form>
 		<pre>{{ homeController.formData }}</pre>
 	</div>
-	<script src="/js/controllers/HomeController.js"></script>
+	<script src="/js/controllers/public/HomeController.js"></script>
 </@t.page>

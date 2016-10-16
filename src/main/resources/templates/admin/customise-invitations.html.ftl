@@ -1,4 +1,4 @@
-<#import "template.html.ftl" as t />
+<#import "macros/template.html.ftl" as t />
 <@t.page title="Customise Invitations">
 	<div ng-controller="CustomiseInvitationsController as customiseInvitationsController">
 	</div>

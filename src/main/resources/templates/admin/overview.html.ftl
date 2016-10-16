@@ -1,4 +1,4 @@
-<#import "template.html.ftl" as t />
+<#import "macros/template.html.ftl" as t />
 <@t.page title="Overview">
 	<div ng-controller="InviteeController as inviteeController">
 		<form class="form-horizontal" ng-submit="inviteeController.submitForm()">
