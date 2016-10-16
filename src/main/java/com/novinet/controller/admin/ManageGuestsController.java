@@ -6,11 +6,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/admin")
-public class OverviewController {
+@RequestMapping("/admin/manage-guests")
+public class ManageGuestsController {
 	
     @GetMapping()
     public String index(Model model) {
-    	return "/admin/overview.html";
+    	return "/admin/manage-guests.html";
     }
 }

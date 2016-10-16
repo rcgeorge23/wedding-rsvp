@@ -1,5 +1,5 @@
 <#import "template.html.ftl" as t />
-<@t.page title="RSVP Overview">
+<@t.page title="Overview">
 	<div ng-controller="InviteeController as inviteeController">
 		<form class="form-horizontal" ng-submit="inviteeController.submitForm()">
 			<fieldset>

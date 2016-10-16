@@ -12,12 +12,11 @@
 
 	<nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left" id="cbp-spmenu-s1">
 		<h3>Menu <span class="pull-right" id="closeNav">x</span></h3>
-		<a href="#">Celery seakale</a>
-		<a href="#">Dulse daikon</a>
-		<a href="#">Zucchini garlic</a>
-		<a href="#">Catsear azuki bean</a>
-		<a href="#">Dandelion bunya</a>
-		<a href="#">Rutabaga</a>
+		<a href="/admin">Overview</a>
+		<a href="/admin/customise-invitations">Customise Invitations</a>
+		<a href="/admin/manage-guests">Manage Guests</a>
+		<a href="/admin/send-invitations">Send Invitations</a>
+		<a href="/admin/my-profile">My Profile</a>
 	</nav>
 	
 	<script>
