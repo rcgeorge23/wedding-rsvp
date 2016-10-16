@@ -1,19 +1,17 @@
 <#import "macros/template.html.ftl" as t />
 <@t.page title="Manage Guests">
 	<div ng-controller="ManageGuestsController as manageGuestsController">
-		<table st-table="manageGuestsController.invitees" class="table table-striped">
+		<table st-table="invitees" class="table table-striped">
 			<thead>
 			<tr>
-				<th>ID</th>
-				<th>Guest Names</th>
-				<th>Email Address</th>
-				<th>Number Of Guests</th>
-				<th>Food Preferences</th>
+				<th st-sort="guestNames">Guest Names</th>
+				<th st-sort="emailAddress">Email Address</th>
+				<th st-sort="numberOfGuests">Number Of Guests</th>
+				<th st-sort="foodPreferences">Food Preferences</th>
 			</tr>
 			</thead>
 			<tbody>
 			<tr ng-repeat="invitee in manageGuestsController.invitees">
-				<td>{{invitee.id}}</td>
 				<td>{{invitee.guestNames}}</td>
 				<td>{{invitee.emailAddress}}</td>
 				<td>{{invitee.numberOfGuests}}</td>

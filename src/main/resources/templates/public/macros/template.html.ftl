@@ -7,7 +7,7 @@
 			<script src="/js/angular/ui-bootstrap-tpls-2.1.4.min.js"></script>
 		</head>
 		<body ng-app="rsvp" ng-cloak>
-			<script src="/js/Main.js"></script> 
+			<script src="/js/Rsvp.js"></script> 
 			<#nested />
 		</body>
 	</html>

@@ -1,20 +1,20 @@
 <#import "macros/template.html.ftl" as t />
 <@t.page title="custom page title">
 	<div ng-controller="HomeController as homeController">
-		<form class="form-horizontal" ng-submit="homeController.submitForm()">
+		<form name="guestForm" class="form-horizontal" ng-submit="guestForm.$valid && homeController.submitForm()" novalidate>
 			<fieldset>
 				<legend>RSVP</legend>
 				<div class="form-group">
 					<label class="col-md-4 control-label" for="guestNames">Guests *</label>
 					<div class="col-md-6">
-						<input ng-model="homeController.formData.guestNames" id="guestNames" name="guestNames" type="text" placeholder="Names of all guests attending" class="form-control input-md" required="required">
+						<input ng-model="homeController.formData.guestNames" id="guestNames" name="guestNames" type="text" placeholder="Names of all guests attending" class="form-control input-md" required>
 					</div>
 				</div>
 	
 				<div class="form-group">
 					<label class="col-md-4 control-label" for="numberOfGuests">Number of guests attending (including yourself) *</label>
 					<div class="col-md-6">
-						<select ng-model="homeController.formData.numberOfGuests" id="numberOfGuests" name="numberOfGuests" class="form-control" required="required">
+						<select ng-model="homeController.formData.numberOfGuests" id="numberOfGuests" name="numberOfGuests" class="form-control" required>
 							<option value="" selected disabled>Please select</option>
 							<option value="1">1</option>
 							<option value="2">2</option>
@@ -37,7 +37,7 @@
 					<div class="col-md-6">
 						<div class="input-group">
 							<span class="input-group-addon">@</span>
-							<input ng-model="homeController.formData.emailAddress" id="emailAddress" name="emailAddress" class="form-control" placeholder="" type="text" required="required">
+							<input ng-model="homeController.formData.emailAddress" id="emailAddress" name="emailAddress" class="form-control" placeholder="" type="email" required>
 						</div>
 					</div>
 				</div>
@@ -49,7 +49,10 @@
 				</div>
 			</fieldset>
 		</form>
-		<pre>{{ homeController.formData }}</pre>
+		<pre>
+			{{ homeController.formData }}
+			Form is valid: {{ guestForm.$valid }}
+		</pre>
 	</div>
 	<script src="/js/controllers/public/HomeController.js"></script>
 </@t.page>

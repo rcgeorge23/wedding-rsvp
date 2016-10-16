@@ -12,7 +12,7 @@
 			<link rel="stylesheet" href="/css/rsvp-admin.css" />
 		</head>
 		<body ng-app="rsvp" ng-cloak>
-			<script src="/js/Main.js"></script>
+			<script src="/js/Rsvp.js"></script>
 			<@n.nav title="${title}"></@n.nav> 
 			<#nested />
 		</body>

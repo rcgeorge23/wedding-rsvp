@@ -1,19 +1,19 @@
 <#import "macros/template.html.ftl" as t />
 <@t.page title="Overview">
 	<div ng-controller="InviteeController as inviteeController">
-		<form class="form-horizontal" ng-submit="inviteeController.submitForm()">
+		<form class="form-horizontal" ng-submit="inviteeController.submitForm()" novalidate>
 			<fieldset>
 				<div class="form-group">
 					<label class="col-md-4 control-label" for="guestNames">Guests *</label>
 					<div class="col-md-6">
-						<input ng-model="inviteeController.formData.guestNames" id="guestNames" name="guestNames" type="text" placeholder="Names of all guests attending" class="form-control input-md" required="required">
+						<input ng-model="inviteeController.formData.guestNames" id="guestNames" name="guestNames" type="text" placeholder="Names of all guests attending" class="form-control input-md" required>
 					</div>
 				</div>
 	
 				<div class="form-group">
 					<label class="col-md-4 control-label" for="numberOfGuests">Number of guests attending (including yourself) *</label>
 					<div class="col-md-6">
-						<select ng-model="inviteeController.formData.numberOfGuests" id="numberOfGuests" name="numberOfGuests" class="form-control" required="required">
+						<select ng-model="inviteeController.formData.numberOfGuests" id="numberOfGuests" name="numberOfGuests" class="form-control" required>
 							<option value="" selected disabled>Please select</option>
 							<option value="1">1</option>
 							<option value="2">2</option>
@@ -36,7 +36,7 @@
 					<div class="col-md-6">
 						<div class="input-group">
 							<span class="input-group-addon">@</span>
-							<input ng-model="inviteeController.formData.emailAddress" id="emailAddress" name="emailAddress" class="form-control" placeholder="" type="text" required="required">
+							<input ng-model="inviteeController.formData.emailAddress" id="emailAddress" name="emailAddress" class="form-control" placeholder="" type="email" required>
 						</div>
 					</div>
 				</div>
