@@ -1,14 +1,9 @@
-<html>
-	<head>
-		<link rel="stylesheet" href="/css/bootstrap.min.css" />
-		<script src="/js/angular.min.js"></script>
-		<script src="/js/ui-bootstrap-tpls-2.1.4.min.js"></script>
-	</head>
+<#import "template.html.ftl" as t />
+<@t.page title="custom page title">
 	<body ng-app="rsvp" ng-controller="HomeController as homeController" ng-cloak>
 		<form class="form-horizontal" ng-submit="homeController.submitForm()">
 			<fieldset>
 				<legend>RSVP</legend>
-	
 				<div class="form-group">
 					<label class="col-md-4 control-label" for="guestNames">Guests *</label>
 					<div class="col-md-6">
@@ -57,4 +52,4 @@
 		<pre>{{ homeController.formData }}</pre>
 		<script src="/js/controllers/HomeController.js"></script>
 	</body>
-</html>
+</@t.page>
