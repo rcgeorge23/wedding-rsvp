@@ -4,22 +4,22 @@
 		<script src="/js/angular.min.js"></script>
 		<script src="/js/ui-bootstrap-tpls-2.1.4.min.js"></script>
 	</head>
-	<body ng-app="rsvp" ng-controller="HomeController" ng-cloak>
-		<form class="form-horizontal" ng-submit="submitForm()">
+	<body ng-app="rsvp" ng-controller="HomeController as homeController" ng-cloak>
+		<form class="form-horizontal" ng-submit="homeController.submitForm()">
 			<fieldset>
 				<legend>RSVP</legend>
 	
 				<div class="form-group">
 					<label class="col-md-4 control-label" for="guestNames">Guests *</label>
 					<div class="col-md-6">
-						<input ng-model="formData.guestNames" id="guestNames" name="guestNames" type="text" placeholder="Names of all guests attending" class="form-control input-md" required="required">
+						<input ng-model="homeController.formData.guestNames" id="guestNames" name="guestNames" type="text" placeholder="Names of all guests attending" class="form-control input-md" required="required">
 					</div>
 				</div>
 	
 				<div class="form-group">
 					<label class="col-md-4 control-label" for="numberOfGuests">Number of guests attending (including yourself) *</label>
 					<div class="col-md-6">
-						<select ng-model="formData.numberOfGuests" id="numberOfGuests" name="numberOfGuests" class="form-control" required="required">
+						<select ng-model="homeController.formData.numberOfGuests" id="numberOfGuests" name="numberOfGuests" class="form-control" required="required">
 							<option value="" selected disabled>Please select</option>
 							<option value="1">1</option>
 							<option value="2">2</option>
@@ -33,7 +33,7 @@
 				<div class="form-group">
 					<label class="col-md-4 control-label" for="foodPreferences">Food preferences for all guests, including any allergies</label>
 					<div class="col-md-6">
-						<textarea ng-model="formData.foodPreferences" class="form-control" id="foodPreferences" name="foodPreferences"></textarea>
+						<textarea ng-model="homeController.formData.foodPreferences" class="form-control" id="foodPreferences" name="foodPreferences"></textarea>
 					</div>
 				</div>
 	
@@ -42,7 +42,7 @@
 					<div class="col-md-6">
 						<div class="input-group">
 							<span class="input-group-addon">@</span>
-							<input ng-model="formData.emailAddress" id="emailAddress" name="emailAddress" class="form-control" placeholder="" type="text" required="required">
+							<input ng-model="homeController.formData.emailAddress" id="emailAddress" name="emailAddress" class="form-control" placeholder="" type="text" required="required">
 						</div>
 					</div>
 				</div>
@@ -54,7 +54,7 @@
 				</div>
 			</fieldset>
 		</form>
-		<pre>{{ formData }}</pre>
-		<script src="/js/controllers/Rsvp.js"></script>
+		<pre>{{ homeController.formData }}</pre>
+		<script src="/js/controllers/HomeController.js"></script>
 	</body>
 </html>

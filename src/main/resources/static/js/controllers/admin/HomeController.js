@@ -1,9 +1,9 @@
 angular.module('myModule', [ 'ui.bootstrap' ]);
 
 angular.module('rsvp', []).controller('HomeController', function($scope, $http) {
-	$scope.formData = {};
+	this.formData = {};
 
-	$scope.submitForm = function() {
+	this.submitForm = function() {
 		$http({
 			method : 'POST',
 			url : '/invitees',

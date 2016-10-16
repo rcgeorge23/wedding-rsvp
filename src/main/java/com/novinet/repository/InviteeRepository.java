@@ -3,6 +3,6 @@ package com.novinet.repository;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
-@RepositoryRestResource
+//@RepositoryRestResource
 public interface InviteeRepository extends CrudRepository<Invitee, Long> {
 }
