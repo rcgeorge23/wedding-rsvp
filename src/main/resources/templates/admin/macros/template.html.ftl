@@ -13,8 +13,12 @@
 		</head>
 		<body ng-app="rsvp" ng-cloak>
 			<script src="/js/Rsvp.js"></script>
-			<@n.nav title="${title}"></@n.nav> 
-			<#nested />
+	  			<div class="row">
+	  				<div class="col-sm-12">
+	  					<@n.nav title="${title}"></@n.nav>
+						<#nested />
+	  				</div> 
+				</div>
 		</body>
 	</html>
 </#macro>
