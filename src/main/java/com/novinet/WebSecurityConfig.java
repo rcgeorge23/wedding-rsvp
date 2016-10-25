@@ -1,6 +1,5 @@
 package com.novinet;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -16,18 +15,25 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		http
 			.authorizeRequests()
 			.antMatchers("/").permitAll()
-			.antMatchers("/admin/**").hasRole("ADMIN")
-			.and().formLogin().loginPage("/login").permitAll()
-			.and().logout().permitAll();
+			.antMatchers("/login/**").permitAll()
+			.antMatchers("/user").permitAll()
+			.antMatchers("/j_spring_security_check").permitAll()
+			.antMatchers("/admin/**").hasRole("ADMIN").and()
+			.formLogin()
+				.loginPage("/auth").permitAll()
+				.loginProcessingUrl("/login").and()
+			.logout().permitAll().and()
+			.csrf().disable();
 	}
 
 	@Override
 	public void configure(WebSecurity web) throws Exception {
 		web.ignoring().antMatchers("/resources/**");
 	}
-
-	@Autowired
-	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+	
+	@Override
+	public void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.inMemoryAuthentication().withUser("user").roles("ADMIN","USER").password("password");
 	}
+
 }

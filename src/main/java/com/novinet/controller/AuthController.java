@@ -6,11 +6,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/login")
-public class LoginController {
+@RequestMapping("/auth")
+public class AuthController {
     
 	@GetMapping()
     public String index(Model model) {
-        return "/public/login.html";
+        return "/public/auth.html";
     }
 }
