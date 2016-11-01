@@ -4,7 +4,12 @@ angular.module('rsvp', []).controller('AuthController', function($rootScope, $sc
 	var self = this;
 
 	var authenticate = function(credentials, callback) {
-	    $http.post('login', {username: credentials.username, password: credentials.password}).then(function(response) {
+	    $http({
+	    	url: 'login',
+	    	method: 'POST',
+	    	params: credentials,
+	    	headers: { "content-type": "application/x-www-form-urlencoded" }
+	    }).then(function(response) {
 	      if (response.data.name) {
 	        $rootScope.authenticated = true;
 	      } else {
