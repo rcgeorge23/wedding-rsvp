@@ -12,6 +12,7 @@ angular.module('rsvp', []).controller('AuthController', function($rootScope, $sc
 	    }).then(function(response) {
 	    	if (response.status == 200) {
 	    		$rootScope.authenticated = true;
+	    		location = '/admin';
 	    	} else {
 	    		$rootScope.authenticated = false;
 	    	}
