@@ -1,5 +1,7 @@
 package com.novinet;
 
+import javax.annotation.Resource;
+
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -10,6 +12,10 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+	
+	@Resource
+	AjaxSuccessHandler ajaxSuccessHandler;
+	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http
@@ -20,6 +26,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.antMatchers("/j_spring_security_check").permitAll()
 			.antMatchers("/admin/**").hasRole("ADMIN").and()
 			.formLogin()
+				.successHandler(ajaxSuccessHandler)
 				.loginPage("/auth").permitAll()
 				.loginProcessingUrl("/login").and()
 			.logout().permitAll().and()

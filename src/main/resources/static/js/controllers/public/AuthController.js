@@ -10,15 +10,15 @@ angular.module('rsvp', []).controller('AuthController', function($rootScope, $sc
 	    	params: credentials,
 	    	headers: { "content-type": "application/x-www-form-urlencoded" }
 	    }).then(function(response) {
-	      if (response.data.name) {
-	        $rootScope.authenticated = true;
-	      } else {
-	        $rootScope.authenticated = false;
-	      }
-	      callback && callback();
+	    	if (response.status == 200) {
+	    		$rootScope.authenticated = true;
+	    	} else {
+	    		$rootScope.authenticated = false;
+	    	}
+	    	callback && callback();
 	    }, function() {
-	      $rootScope.authenticated = false;
-	      callback && callback();
+	    	$rootScope.authenticated = false;
+	    	callback && callback();
 	    });
 	};
 
