@@ -1,5 +1,5 @@
 <#import "macros/template.html.ftl" as t />
-<@t.page title="Overview">
+<@t.page title="Overview" menu="menus/overview-menu.html.ftl">
 	<div ng-controller="InviteeController as inviteeController">
 		<form class="form-horizontal" ng-submit="inviteeController.submitForm()" novalidate>
 			<fieldset>

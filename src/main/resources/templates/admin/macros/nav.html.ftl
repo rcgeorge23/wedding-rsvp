@@ -1,5 +1,4 @@
-<#macro nav title>
-	
+<#macro nav title menu>
 	<nav class="navbar navbar-default"> 
 		<div class="navbar-header"> 
 			<form class="navbar-form navbar-left"> 
@@ -8,7 +7,10 @@
 				</button>
 			</form> 	
 		</div>
-		<a href="#" class="navbar-brand pull-right">${title}</a> 
+		<div class="collapse navbar-collapse">
+			<#import "${menu}" as m />
+			<@m.menu />
+		</div>
 	</nav>
 	
 	<div id="leftNav">

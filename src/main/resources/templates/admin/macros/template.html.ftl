@@ -1,5 +1,5 @@
 <#import "nav.html.ftl" as n />
-<#macro page title>
+<#macro page title menu>
 	<html>
 		<head>
 			<link rel="stylesheet" href="/css/twitter-bootstrap/bootstrap.min.css" />
@@ -15,7 +15,7 @@
 			<script src="/js/Rsvp.js"></script>
 	  			<div class="row">
 	  				<div class="col-sm-12">
-	  					<@n.nav title="${title}"></@n.nav>
+	  					<@n.nav title="${title}" menu="${menu}"></@n.nav>
 						<#nested />
 	  				</div> 
 				</div>

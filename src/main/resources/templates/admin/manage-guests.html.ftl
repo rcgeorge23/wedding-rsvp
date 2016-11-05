@@ -1,5 +1,5 @@
 <#import "macros/template.html.ftl" as t />
-<@t.page title="Manage Guests">
+<@t.page title="Manage Guests" menu="menus/manage-guests-menu.html.ftl">
 	<div ng-controller="ManageGuestsController as manageGuestsController">
 		<div class="panel panel-default">
 	  		<div class="panel-heading">Guests</div>
