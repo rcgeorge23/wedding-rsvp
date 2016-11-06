@@ -10,7 +10,8 @@ rsvp.controller('ManageGuestsController', function($scope, $http, $uibModal) {
 			templateUrl: '/admin/manage-guests/import-guests-modal',
 			controller: 'ImportGuestsModalController',
 			controllerAs: 'importGuestsModalController',
-			bindToController: true
+			bindToController: true,
+			size: 'lg'
 		});
 	};
 });

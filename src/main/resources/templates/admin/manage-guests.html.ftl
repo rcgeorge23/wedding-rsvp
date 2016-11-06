@@ -4,7 +4,7 @@
 		<div class="panel panel-default">
 	  		<div class="panel-heading">Guests</div>
 	  		<div class="panel-body">
-				<table st-table="invitees" class="table table-striped table-bordered table-hover">
+				<table st-table="invitees" class="table table-striped table-hover">
 					<thead>
 					<tr>
 						<th st-sort="guestNames">Guest Names</th>

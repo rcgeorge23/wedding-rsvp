@@ -1,9 +1,12 @@
 package com.novinet.controller.admin.manageguests;
 
+import static org.slf4j.LoggerFactory.getLogger;
+
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 
+import org.slf4j.Logger;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -18,6 +21,8 @@ import org.springframework.web.multipart.MultipartFile;
 @RequestMapping("/admin/manage-guests/import-guests-modal")
 public class ImportGuestsModalController {
 
+	private static final Logger log = getLogger(ImportGuestsModalController.class);
+	
 	@GetMapping
 	public String index(Model model) {
 		return "/admin/manage-guests/import-guests-modal.html";
@@ -31,7 +36,7 @@ public class ImportGuestsModalController {
 			stream.write(uploadedFile.getBytes());
 			stream.close();
 		} catch (Exception e) {
-			e.printStackTrace();
+			log.error("Error writing uploaded file to filesystem", e);
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
 		return new ResponseEntity<>(HttpStatus.OK);
