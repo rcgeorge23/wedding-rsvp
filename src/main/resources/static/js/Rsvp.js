@@ -9,3 +9,18 @@
 })(angular.module);
 
 var rsvp = angular.module('rsvp', ['ui.bootstrap', 'smart-table', 'ui.bootstrap.modal']);
+
+rsvp.directive("fileread", [function () {
+    return {
+        scope: {
+            fileread: "="
+        },
+        link: function (scope, element, attributes) {
+            element.bind("change", function (changeEvent) {
+                scope.$apply(function () {
+                    scope.fileread = changeEvent.target.files[0];
+                });
+            });
+        }
+    }
+}]);

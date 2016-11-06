@@ -4,7 +4,6 @@
 		<form name="loginForm" class="form-horizontal" ng-submit="loginForm.$valid && authController.login()" novalidate>
 			<fieldset>
 				<legend>Login</legend>
-				error={{authController.error}}
 				<div class="form-group">
 					<label class="col-md-4 control-label" for="username">Username</label>
 					<div class="col-md-6">
