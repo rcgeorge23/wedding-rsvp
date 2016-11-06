@@ -8,4 +8,4 @@
     }
 })(angular.module);
 
-var rsvp = angular.module('rsvp', ['ui.bootstrap', 'smart-table']);
+var rsvp = angular.module('rsvp', ['ui.bootstrap', 'smart-table', 'ui.bootstrap.modal']);
