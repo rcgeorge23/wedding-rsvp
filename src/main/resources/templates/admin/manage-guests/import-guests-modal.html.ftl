@@ -1,13 +1,28 @@
 <div class="modal-content">
 	<div class="modal-header">
-		<button type="button" class="close" ng-click="close('Cancel')" data-dismiss="modal" aria-hidden="true">&times;</button>
-		<h4 class="modal-title">Yes or No?</h4>
+		<button type="button" class="close" ng-click="importGuestsModalController.cancel()" data-dismiss="modal" aria-hidden="true">&times;</button>
+		<h4 class="modal-title">Import Guests</h4>
 	</div>
 	<div class="modal-body">
-		<p>It's your call...</p>
+		importGuestsModalController.filename={{importGuestsModalController.filename}}
+		<form name="importGuestsForm" class="form-horizontal" novalidate>
+			<div class="form-group">
+				<label class="col-md-3 control-label" for="username">Excel or CSV file</label>
+				<div class="col-md-9">
+					<div class="input-group">
+                		<label class="input-group-btn">
+                    		<span class="btn btn-primary">
+                        		Browse… <input ng-model="importGuestsModalController.filename" id="filename" name="filename" type="file" style="display: none;">
+                    		</span>
+                		</label>
+                		<input type="text" class="form-control" readonly="" value="{{importGuestsModalController.filename}}" />
+            		</div>		
+            	</div>			
+			</div>
+		</form>
 	</div>
 	<div class="modal-footer">
-		<button type="button" ng-click="close('No')" class="btn btn-default" data-dismiss="modal">No</button>
-		<button type="button" ng-click="close('Yes')" class="btn btn-primary" data-dismiss="modal">Yes</button>
+		<button type="button" ng-click="importGuestsModalController.cancel()" class="btn btn-default" data-dismiss="modal">Cancel</button>
+		<button type="button" ng-click="close('Import')" class="btn btn-primary" data-dismiss="modal">Import</button>
 	</div>
 </div>

@@ -6,10 +6,19 @@ rsvp.controller('ManageGuestsController', function($scope, $http, $uibModal) {
     });
 	
 	self.openImportModal = function() {
-		console.debug("hello");
 		$uibModal.open({
-			templateUrl: '/admin/manage-guests/import-guests-modal'
+			templateUrl: '/admin/manage-guests/import-guests-modal',
+			controller: 'ImportGuestsModalController',
+			controllerAs: 'importGuestsModalController',
+			bindToController: true
 		});
 	};
 });
 
+rsvp.controller('ImportGuestsModalController', function($uibModalInstance) {
+	var self = this;
+	
+	this.cancel = function () {
+		$uibModalInstance.dismiss('cancel');
+	};
+});
