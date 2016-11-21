@@ -12,10 +12,10 @@
 						<div class="input-group">
 	                		<label class="input-group-btn">
 	                    		<span class="btn btn-primary">
-	                        		Browse… <input fileread="importGuestsModalController.file" type="file" style="display: none;">
+	                        		Browse... <input fileread="importGuestsModalController.file" onread="importGuestsModalController.uploadFile()" type="file" style="display: none;"/>
 	                    		</span>
 	                		</label>
-	                		<input type="text" class="form-control" readonly="" value="{{importGuestsModalController.file.name}}" />
+	                		<input type="text" class="form-control" readonly="" ng-model="importGuestsModalController.file.name" />
 	            		</div>		
 	            	</div>			
 				</div>

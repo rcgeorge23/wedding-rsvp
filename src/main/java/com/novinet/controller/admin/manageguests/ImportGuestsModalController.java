@@ -6,6 +6,8 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 
+import javax.annotation.Resource;
+
 import org.slf4j.Logger;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,11 +19,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.novinet.service.guest.ImportGuestsService;
+
 @Controller
 @RequestMapping("/admin/manage-guests/import-guests-modal")
 public class ImportGuestsModalController {
 
 	private static final Logger log = getLogger(ImportGuestsModalController.class);
+	
+	@Resource
+	private ImportGuestsService importGuestsService;
 	
 	@GetMapping
 	public String index(Model model) {

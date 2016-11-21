@@ -19,11 +19,15 @@ rsvp.controller('ManageGuestsController', function($scope, $http, $uibModal) {
 rsvp.controller('ImportGuestsModalController', function($uibModalInstance, $http) {
 	var self = this;
 	
-	this.cancel = function () {
+	this.cancel = function() {
 		$uibModalInstance.dismiss('cancel');
 	};
 	
-	this.import = function () {
+	this.uploadFile = function() {
+		console.debug("file uploading");
+	};
+	
+	this.import = function() {
 		if (self.file == null) {
 			alert("no file selected");
 			return;
