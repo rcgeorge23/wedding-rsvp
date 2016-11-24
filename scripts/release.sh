@@ -55,7 +55,7 @@ RELEASE_JAR_NAME=getJarName
 #Commit release version pom, rename jar and tag release
 CURRENT_PROJECT_VERSION=$(getCurrentProjectVersion)
 logMessage "Committing release ${CURRENT_PROJECT_VERSION} to source git repo"
-renameJar ORIGINAL_SNAPSHOT_JAR_NAME RELEASE_JAR_NAME
+renameJar $ORIGINAL_SNAPSHOT_JAR_NAME $RELEASE_JAR_NAME
 gitCommitPush "Releasing version ${CURRENT_PROJECT_VERSION}"
 gitTagPush "${CURRENT_PROJECT_VERSION}" 
 
