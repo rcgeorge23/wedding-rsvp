@@ -32,8 +32,8 @@ getJarName() {
 }
 
 renameJar() {
-	FROM="$SCRIPT_DIRECTORY/target/$1"
-	TO="$SCRIPT_DIRECTORY/target/$2"
+	FROM="$SCRIPT_DIRECTORY/../target/$1"
+	TO="$SCRIPT_DIRECTORY/../target/$2"
 	echo "Renaming release jar from $FROM to $TO" 
 	mv $FROM $TO
 }
