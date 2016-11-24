@@ -45,12 +45,12 @@ logMessage() {
 	echo "==============================================================================="
 }
 
-ORIGINAL_SNAPSHOT_JAR_NAME=getJarName
+ORIGINAL_SNAPSHOT_JAR_NAME="$(getJarName)"
 
 logMessage "Removing -SNAPSHOT from version number in pom.xml"
 mvn build-helper:parse-version versions:set -DnewVersion=\${parsedVersion.majorVersion}.\${parsedVersion.minorVersion}.\${parsedVersion.incrementalVersion} versions:commit
 
-RELEASE_JAR_NAME=getJarName
+RELEASE_JAR_NAME="$(getJarName)"
 
 #Commit release version pom, rename jar and tag release
 CURRENT_PROJECT_VERSION=$(getCurrentProjectVersion)
