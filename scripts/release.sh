@@ -67,3 +67,12 @@ gitCommitPush "Prepared next snapshot ${NEXT_PROJECT_SNAPSHOT_VERSION}"
 
 #Push jar to release git repo
 #todo...
+logMessage "Pushing jar to release repo"
+RELEASE_PROJECT_PATH="/tmp/wedding-rsvp-releases"
+git clone git@github.com:rcgeorge23/wedding-rsvp-releases.git $RELEASE_PROJECT_PATH
+mkdir -p "${RELEASE_PROJECT_PATH}/current"
+mkdir -p "${RELEASE_PROJECT_PATH}/archive"
+mv "${RELEASE_PROJECT_PATH}/current/*" "${RELEASE_PROJECT_PATH}/archive/"
+cp "${SCRIPT_DIRECTORY}/target/${RELEASE_JAR_NAME}" "${RELEASE_PROJECT_PATH}/current"
+cd "${RELEASE_PROJECT_PATH}"
+gitCommitPush "Releasing version ${CURRENT_PROJECT_VERSION}"
