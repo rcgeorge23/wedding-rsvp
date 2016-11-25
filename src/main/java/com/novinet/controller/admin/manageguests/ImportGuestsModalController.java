@@ -38,10 +38,7 @@ public class ImportGuestsModalController {
 	@PostMapping
 	public ResponseEntity<?> upload(@RequestParam("file") MultipartFile uploadedFile) {
 		try {
-			File file = File.createTempFile("rsvp", "import");
-			BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(file));
-			stream.write(uploadedFile.getBytes());
-			stream.close();
+			importGuestsService.importBytes(uploadedFile.getBytes());
 		} catch (Exception e) {
 			log.error("Error writing uploaded file to filesystem", e);
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);

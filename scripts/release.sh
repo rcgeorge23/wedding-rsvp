@@ -66,7 +66,6 @@ logMessage "Incremented project to next snapshot version: ${NEXT_PROJECT_SNAPSHO
 gitCommitPush "Prepared next snapshot ${NEXT_PROJECT_SNAPSHOT_VERSION}"
 
 #Push jar to release git repo
-#todo...
 logMessage "Pushing jar to release repo"
 RELEASE_PROJECT_PATH="/tmp/wedding-rsvp-releases"
 git clone git@github.com:rcgeorge23/wedding-rsvp-releases.git $RELEASE_PROJECT_PATH
