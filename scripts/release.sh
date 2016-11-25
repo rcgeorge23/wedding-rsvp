@@ -1,10 +1,11 @@
 #!/bin/bash
 
 SCRIPT_DIRECTORY="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+PROJECT_ROOT_DIRECTORY=$SCRIPT_DIRECTORY/..
 
 cdToProjectRoot() {
 	#Assumes the script lives in <project_root>/scripts
-	cd $SCRIPT_DIRECTORY/..
+	cd $PROJECT_ROOT_DIRECTORY
 }
 
 gitCommitPush() {
@@ -32,8 +33,8 @@ getJarName() {
 }
 
 renameJar() {
-	FROM="$SCRIPT_DIRECTORY/../target/$1"
-	TO="$SCRIPT_DIRECTORY/../target/$2"
+	FROM="$PROJECT_ROOT_DIRECTORY/target/$1"
+	TO="$PROJECT_ROOT_DIRECTORY/target/$2"
 	echo "Renaming release jar from $FROM to $TO" 
 	mv $FROM $TO
 }
@@ -88,7 +89,7 @@ if [ "$(ls -A ${RELEASE_PROJECT_PATH}/current)" ]; then
 fi
 
 echo "Copying latest release jar to current release directory"
-cp "${SCRIPT_DIRECTORY}/target/${RELEASE_JAR_NAME}" "${RELEASE_PROJECT_PATH}/current"
+cp "${PROJECT_ROOT_DIRECTORY}/target/${RELEASE_JAR_NAME}" "${RELEASE_PROJECT_PATH}/current"
 cd "${RELEASE_PROJECT_PATH}"
 echo "Committing and pushing to release repo"
 gitCommitPush "Releasing version ${CURRENT_PROJECT_VERSION}"
