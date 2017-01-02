@@ -47,7 +47,7 @@ logMessage() {
 }
 
 #todo: prechecks
-#check if propsed tag already exists
+#check if proposed tag already exists
 #check if there are any outstanding uncommitted or unpushed changes (apart from the compiled jar)
 
 ORIGINAL_SNAPSHOT_JAR_NAME="$(getJarName)"

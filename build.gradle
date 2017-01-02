@@ -1,0 +1,44 @@
+plugins {
+    id 'org.springframework.boot' version '1.4.3.RELEASE' apply true
+}
+
+apply plugin: 'java'
+apply plugin: 'maven'
+
+
+
+group = 'com.novinet'
+
+version = '0.0.1-SNAPSHOT'
+
+description = """wedding-rsvp"""
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+	jcenter()
+    maven { url "http://repo.maven.apache.org/maven2" }
+}
+dependencies {
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa', version:'1.4.3.RELEASE'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-rest', version:'1.4.3.RELEASE'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-jersey', version:'1.4.3.RELEASE'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-validation', version:'1.4.3.RELEASE'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version:'1.4.3.RELEASE'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-freemarker', version:'1.4.3.RELEASE'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-security', version:'1.4.3.RELEASE'
+    compile group: 'org.apache.poi', name: 'poi', version:'3.15'
+    compile group: 'org.apache.poi', name: 'poi-ooxml', version:'3.15'
+    compile group: 'org.apache.commons', name: 'commons-lang3', version:'3.4'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-actuator', version:'1.4.3.RELEASE'
+    runtime group: 'com.h2database', name: 'h2', version:'1.4.192'
+    runtime group: 'mysql', name: 'mysql-connector-java', version:'5.1.39'
+   	testCompile(group: 'org.springframework.boot', name: 'spring-boot-starter-test', version:'1.4.3.RELEASE') {
+		exclude(module: 'commons-logging')
+    }
+}
+
+bootRun {
+    addResources = true
+}
