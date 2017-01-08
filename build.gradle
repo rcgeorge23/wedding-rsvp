@@ -12,9 +12,16 @@ apply plugin: 'maven'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'eclipse'
 
+ext.getCurrentBuildNumber = { 
+    Properties props = new Properties() 
+	File propsFile = new File("version.properties")
+	props.load(propsFile.newDataInputStream()) 
+	return props.getProperty("artifactBuildNumber")
+}
+
 jar {
     baseName = 'wedding-rsvp'
-    version =  '0.0.1-SNAPSHOT'
+    version = getCurrentBuildNumber()
 }
 
 sourceCompatibility = 1.8
@@ -47,3 +54,16 @@ dependencies {
 bootRun {
     addResources = true
 }
+
+task buildnumberplusone {
+	doLast { 
+		Properties props = new Properties() 
+		File propsFile = new File("version.properties")
+		props.load(propsFile.newDataInputStream()) 
+		Integer nextbuildnum = (((props.getProperty("artifactBuildNumber")) as BigDecimal) + 1) 
+		props.setProperty("artifactBuildNumber", nextbuildnum.toString()) 
+		props.store(propsFile.newWriter(), null) 
+		props.load(propsFile.newDataInputStream())	
+	}
+}
+
