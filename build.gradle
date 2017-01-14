@@ -74,7 +74,9 @@ task buildNumberPlusOne {
 		props.store(propsFile.newWriter(), null) 
 		props.load(propsFile.newDataInputStream())
 		
-		Grgit applicationRepo = Grgit.open(dir: "./")	
+		//repo may be in detatched mode (e.g. if this is running in jenkins), so clone a new copy of master and increment the version number there
+		def applicationRepo = Grgit.clone(dir: '/tmp/wedding-rsvp', uri: 'git@github.com:rcgeorge23/wedding-rsvp.git')
+		FileUtils.copyFileToDirectory(propsFile, new File('/tmp/wedding-rsvp')) 
 		applicationRepo.add(patterns: ['version.properties'])
 		applicationRepo.commit(message: "Incremented version number to ${getCurrentBuildNumber()}")
 		applicationRepo.push()
