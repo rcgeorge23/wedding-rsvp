@@ -85,6 +85,7 @@ task pushJarToReleaseRepo {
 			FileUtils.deleteQuietly(releaseRepositoryDirectory)
 		}
 		println "Cloning fresh copy of release repo to tmp directory"
+		new File("/tmp").mkdirs()
 		def releaseGitRepo = Grgit.clone(dir: '/tmp/wedding-rsvp-releases', uri: 'git@github.com:rcgeorge23/wedding-rsvp-releases.git')
 		
 		File buildArtifactDirectory = new File("build/libs")
