@@ -21,17 +21,16 @@ apply plugin: 'org.ajoberstar.release-opinion'
 import org.ajoberstar.grgit.Grgit
 import org.apache.commons.io.FileUtils
 
-
 repositories {
 	jcenter()
     mavenCentral()
 }
 
 ext.getCurrentBuildNumber = { 
-    Properties props = new Properties() 
-	File propsFile = new File("version.properties")
-	props.load(propsFile.newDataInputStream()) 
-	return props.getProperty("artifactBuildNumber")
+    Properties versionProperties = new Properties() 
+	File versionPropertiesFile = new File("version.properties")
+	versionProperties.load(versionPropertiesFile.newDataInputStream()) 
+	return versionProperties.getProperty("artifactBuildNumber")
 }
 
 jar {
@@ -73,7 +72,12 @@ task buildNumberPlusOne {
 		Integer nextBuildNum = (((props.getProperty("artifactBuildNumber")) as BigDecimal) + 1) 
 		props.setProperty("artifactBuildNumber", nextBuildNum.toString()) 
 		props.store(propsFile.newWriter(), null) 
-		props.load(propsFile.newDataInputStream())	
+		props.load(propsFile.newDataInputStream())
+		
+		Grgit applicationRepo = Grgit.open(dir: "./")	
+		applicationRepo.add(patterns: ['version.properties'])
+		applicationRepo.commit(message: "Incremented version number to ${getCurrentBuildNumber()}")
+		applicationRepo.push()
 	}
 }
 
