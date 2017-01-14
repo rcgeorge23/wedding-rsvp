@@ -125,6 +125,7 @@ task pushJarToReleaseRepo {
 		println "moving current jar(s) to archive directory"
 		currentBuildArtefactDirectory.listFiles().each { file ->
 			FileUtils.moveFileToDirectory(file, archivedBuildArtefactsDirectory, true)
+			FileUtils.deleteQuietly(file)
 		}
 		
 		println "copying freshly built jar to current directory"
