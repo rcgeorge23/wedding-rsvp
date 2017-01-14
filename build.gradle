@@ -76,7 +76,7 @@ task buildNumberPlusOne {
 	}
 }
 
-task pushBuildNumberPlusOneToApplicationRepo {
+task pushVersionFileToApplicationRepo {
 	doLast {
 		FileUtils.deleteQuietly(new File('/tmp/wedding-rsvp'))
 		def applicationRepo = Grgit.clone(dir: '/tmp/wedding-rsvp', uri: 'git@github.com:rcgeorge23/wedding-rsvp.git')
