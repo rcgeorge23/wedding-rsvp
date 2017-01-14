@@ -84,6 +84,7 @@ task pushJarToReleaseRepo {
 			println "Release directory exists, deleting..."
 			FileUtils.deleteQuietly(releaseRepositoryDirectory)
 		}
+		
 		println "Cloning fresh copy of release repo to tmp directory"
 		new File("/tmp").mkdirs()
 		def releaseGitRepo = Grgit.clone(dir: '/tmp/wedding-rsvp-releases', uri: 'git@github.com:rcgeorge23/wedding-rsvp-releases.git')
@@ -112,7 +113,7 @@ task pushJarToReleaseRepo {
 		
 		println "moving current jar(s) to archive directory"
 		currentBuildArtefactDirectory.listFiles().each { file ->
-			FileUtils.moveFileToDirectory(file, archivedBuildArtefactsDirectory)
+			FileUtils.moveFileToDirectory(file, archivedBuildArtefactsDirectory, true)
 		}
 		
 		println "copying freshly built jar to current directory"
