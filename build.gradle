@@ -4,6 +4,8 @@ buildscript {
     }
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:1.4.3.RELEASE")
+        classpath("org.ajoberstar:gradle-git:1.6.0")
+        classpath("commons-io:commons-io:2.4")
     }
 }
 
@@ -11,6 +13,19 @@ apply plugin: 'java'
 apply plugin: 'maven'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'eclipse'
+apply plugin: 'org.ajoberstar.grgit'
+apply plugin: 'org.ajoberstar.github-pages'
+apply plugin: 'org.ajoberstar.release-opinion'
+
+//Imports
+import org.ajoberstar.grgit.Grgit
+import org.apache.commons.io.FileUtils
+
+
+repositories {
+	jcenter()
+    mavenCentral()
+}
 
 ext.getCurrentBuildNumber = { 
     Properties props = new Properties() 
@@ -27,11 +42,6 @@ jar {
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
-repositories {
-	jcenter()
-    mavenCentral()
-}
-
 dependencies {
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa'
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-rest'
@@ -43,6 +53,7 @@ dependencies {
     compile group: 'org.apache.poi', name: 'poi', version:'3.15'
     compile group: 'org.apache.poi', name: 'poi-ooxml', version:'3.15'
     compile group: 'org.apache.commons', name: 'commons-lang3', version:'3.4'
+	compile group: 'org.apache.commons', name: 'commons-io', version:'2.4'
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-actuator'
     runtime group: 'com.h2database', name: 'h2', version:'1.4.192'
     runtime group: 'mysql', name: 'mysql-connector-java', version:'5.1.39'
@@ -55,15 +66,63 @@ bootRun {
     addResources = true
 }
 
-task buildnumberplusone {
+task buildNumberPlusOne {
 	doLast { 
 		Properties props = new Properties() 
 		File propsFile = new File("version.properties")
 		props.load(propsFile.newDataInputStream()) 
-		Integer nextbuildnum = (((props.getProperty("artifactBuildNumber")) as BigDecimal) + 1) 
-		props.setProperty("artifactBuildNumber", nextbuildnum.toString()) 
+		Integer nextBuildNum = (((props.getProperty("artifactBuildNumber")) as BigDecimal) + 1) 
+		props.setProperty("artifactBuildNumber", nextBuildNum.toString()) 
 		props.store(propsFile.newWriter(), null) 
 		props.load(propsFile.newDataInputStream())	
 	}
 }
+
+task pushJarToReleaseRepo {
+	doLast { 
+		File releaseRepositoryDirectory = new File("/tmp/wedding-rsvp-releases")
+		if (releaseRepositoryDirectory.exists()) {
+			println "Release directory exists, deleting..."
+			FileUtils.deleteQuietly(releaseRepositoryDirectory)
+		}
+		println "Cloning fresh copy of release repo to tmp directory"
+		def releaseGitRepo = Grgit.clone(dir: '/tmp/wedding-rsvp-releases', uri: 'git@github.com:rcgeorge23/wedding-rsvp-releases.git')
+		
+		File buildArtifactDirectory = new File("build/libs")
+		File[] jars = buildArtifactDirectory.listFiles(new FilenameFilter() { 
+			public boolean accept(File dir, String filename) { 
+				return filename.endsWith(".jar")
+			}
+        })
+		
+		if (jars.length == 0) {
+			throw new Exception("No build artifact in ${buildArtifactDirectory.absoluteFile}")
+		} 
+		
+		if (jars.length > 1) {
+			throw new Exception("More than 1 build artifact found in ${buildArtifactDirectory.absoluteFile}: ${jars.collect { it.name } }")
+		}
+		
+		//there can only be one jar now, create the current and archive dirs if necessary
+		File currentBuildArtefactDirectory = new File("/tmp/wedding-rsvp-releases/current")
+		File archivedBuildArtefactsDirectory = new File("/tmp/wedding-rsvp-releases/archive")
+		
+		currentBuildArtefactDirectory.mkdirs()
+		archivedBuildArtefactsDirectory.mkdirs()
+		
+		println "moving current jar(s) to archive directory"
+		currentBuildArtefactDirectory.listFiles().each { file ->
+			FileUtils.moveFileToDirectory(file, archivedBuildArtefactsDirectory)
+		}
+		
+		println "copying freshly built jar to current directory"
+		FileUtils.copyFileToDirectory(jars[0], currentBuildArtefactDirectory)
+		
+		println "committing jar and pushing to remote"
+		releaseGitRepo.add(patterns: ['current', 'archive'])
+		releaseGitRepo.commit(message: "Releasing version ${getCurrentBuildNumber()}")
+		releaseGitRepo.push()
+	}
+}
+
 
