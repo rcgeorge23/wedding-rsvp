@@ -124,8 +124,15 @@ task pushJarToReleaseRepo {
 		
 		println "moving current jar(s) to archive directory"
 		currentBuildArtefactDirectory.listFiles().each { file ->
+			println "trying to move file: ${file}"
 			FileUtils.moveFileToDirectory(file, archivedBuildArtefactsDirectory, true)
+			println "old file still exists: ${file.exists()}"
 			FileUtils.deleteQuietly(file)
+			println "old file still exists: ${file.exists()}"
+			if (file.exists()) {
+				file.delete()
+				println "old file still exists: ${file.exists()}"
+			}
 		}
 		
 		println "copying freshly built jar to current directory"
