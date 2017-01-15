@@ -34,7 +34,9 @@ ext {
 		return versionProperties.getProperty("artifactBuildNumber")
 	}
 	applicationRepositoryName = 'wedding-rsvp'
+	applicationRepositoryUrl = 'git@github.com:rcgeorge23/wedding-rsvp.git'
 	releaseRepositoryName = 'wedding-rsvp-releases'
+	releaseRepositoryUrl = 'git@github.com:rcgeorge23/wedding-rsvp-releases.git'
 }
 
 jar {
@@ -70,6 +72,7 @@ bootRun {
 
 task buildNumberPlusOne {
 	doLast { 
+		println "project version:" + project.version.toString()
 		Properties props = new Properties() 
 		File propsFile = new File("version.properties")
 		props.load(propsFile.newDataInputStream()) 
@@ -82,11 +85,13 @@ task buildNumberPlusOne {
 
 task pushVersionFileToApplicationRepo {
 	doLast {
-		println "hello!! ${applicationRepositoryName}"
-		FileUtils.deleteQuietly(new File('/tmp/wedding-rsvp'))
-		def applicationRepo = Grgit.clone(dir: '/tmp/wedding-rsvp', uri: 'git@github.com:rcgeorge23/wedding-rsvp.git')
+		def jenkinsRepo = Grgit.open(dir: "./")
+		
+		
+		FileUtils.deleteQuietly(new File("/tmp/${applicationRepositoryName}"))
+		def applicationRepo = Grgit.clone(dir: "/tmp/${applicationRepositoryName}", uri: applicationRepositoryUrl)
 		File propsFile = new File("version.properties")
-		FileUtils.copyFileToDirectory(propsFile, new File('/tmp/wedding-rsvp'))
+		FileUtils.copyFileToDirectory(propsFile, new File("/tmp/${applicationRepositoryName}"))
 		applicationRepo.add(patterns: ['version.properties'])
 		applicationRepo.commit(message: "Incremented version number to ${getCurrentBuildNumber()}")
 		applicationRepo.push()
@@ -95,7 +100,7 @@ task pushVersionFileToApplicationRepo {
 
 task pushJarToReleaseRepo {
 	doLast { 
-		File releaseRepositoryDirectory = new File("/tmp/wedding-rsvp-releases")
+		File releaseRepositoryDirectory = new File("/tmp/${releaseRepositoryName}")
 		if (releaseRepositoryDirectory.exists()) {
 			println "Release directory exists, deleting..."
 			FileUtils.deleteQuietly(releaseRepositoryDirectory)
@@ -103,7 +108,7 @@ task pushJarToReleaseRepo {
 		
 		println "Cloning fresh copy of release repo to tmp directory"
 		new File("/tmp").mkdirs()
-		def releaseGitRepo = Grgit.clone(dir: '/tmp/wedding-rsvp-releases', uri: 'git@github.com:rcgeorge23/wedding-rsvp-releases.git')
+		def releaseGitRepo = Grgit.clone(dir: "/tmp/${releaseRepositoryName}", uri: releaseRepositoryUrl)
 		
 		File buildArtifactDirectory = new File("build/libs")
 		File[] jars = buildArtifactDirectory.listFiles(new FilenameFilter() { 
@@ -121,8 +126,8 @@ task pushJarToReleaseRepo {
 		}
 		
 		//there can only be one jar now, create the current and archive dirs if necessary
-		File currentBuildArtefactDirectory = new File("/tmp/wedding-rsvp-releases/current")
-		File archivedBuildArtefactsDirectory = new File("/tmp/wedding-rsvp-releases/archive")
+		File currentBuildArtefactDirectory = new File("/tmp/${releaseRepositoryName}/current")
+		File archivedBuildArtefactsDirectory = new File("/tmp/${releaseRepositoryName}/archive")
 		
 		currentBuildArtefactDirectory.mkdirs()
 		archivedBuildArtefactsDirectory.mkdirs()
