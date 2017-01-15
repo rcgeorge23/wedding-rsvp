@@ -27,12 +27,14 @@ repositories {
 }
 
 ext {
+	/*
 	getCurrentBuildNumber = { 
 	    Properties versionProperties = new Properties() 
 		File versionPropertiesFile = new File("version.properties")
 		versionProperties.load(versionPropertiesFile.newDataInputStream()) 
 		return versionProperties.getProperty("artifactBuildNumber")
 	}
+	*/
 	applicationRepositoryName = 'wedding-rsvp'
 	applicationRepositoryUrl = 'git@github.com:rcgeorge23/wedding-rsvp.git'
 	releaseRepositoryName = 'wedding-rsvp-releases'
@@ -41,7 +43,7 @@ ext {
 
 jar {
     baseName = 'wedding-rsvp'
-    version = getCurrentBuildNumber()
+    version = project.version.toString()
 }
 
 sourceCompatibility = 1.8
@@ -70,6 +72,7 @@ bootRun {
     addResources = true
 }
 
+/*
 task buildNumberPlusOne {
 	doLast { 
 		println "project version:" + project.version.toString()
@@ -97,6 +100,7 @@ task pushVersionFileToApplicationRepo {
 		applicationRepo.push()
 	}
 }
+*/
 
 task pushJarToReleaseRepo {
 	doLast { 
@@ -145,9 +149,10 @@ task pushJarToReleaseRepo {
 		//releaseGitRepo.add(patterns: ['current', 'archive'])
 		releaseGitRepo.add(patterns: ['current', 'archive'], update: true)
 		releaseGitRepo.add(patterns: ['current', 'archive'])
-		releaseGitRepo.commit(message: "Releasing version ${getCurrentBuildNumber()}")
+		releaseGitRepo.commit(message: "Releasing version ${project.version.toString()}")
 		releaseGitRepo.push()
 	}
 }
 
+tasks.release.dependsOn 'build', 'pushJarToReleaseRepo'
 
