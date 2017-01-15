@@ -82,6 +82,7 @@ task buildNumberPlusOne {
 
 task pushVersionFileToApplicationRepo {
 	doLast {
+		println "hello!! ${applicationRepositoryName}"
 		FileUtils.deleteQuietly(new File('/tmp/wedding-rsvp'))
 		def applicationRepo = Grgit.clone(dir: '/tmp/wedding-rsvp', uri: 'git@github.com:rcgeorge23/wedding-rsvp.git')
 		File propsFile = new File("version.properties")
@@ -134,9 +135,6 @@ task pushJarToReleaseRepo {
 		println "copying freshly built jar to current and archive directory"
 		FileUtils.copyFileToDirectory(jars[0], currentBuildArtefactDirectory)
 		//FileUtils.copyFileToDirectory(jars[0], archivedBuildArtefactsDirectory) //commented this out for now - do we really want to keep old builds?
-		
-//		println "renaming current jar to 'wedding-rsvp-current.jar'"
-//		FileUtils.moveFile(new File(currentBuildArtefactDirectory.path, jars[0].name), new File(currentBuildArtefactDirectory.path, "wedding-rsvp-current.jar"))
 		
 		println "committing jar and pushing to remote"
 		//releaseGitRepo.add(patterns: ['current', 'archive'])
