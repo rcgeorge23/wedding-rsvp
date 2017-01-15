@@ -140,7 +140,6 @@ task pushJarToReleaseRepo {
 		
 		println "committing jar and pushing to remote"
 		releaseGitRepo.add(patterns: ['current', 'archive'])
-		releaseGitRepo.add(cached: true)
 		releaseGitRepo.commit(message: "Releasing version ${getCurrentBuildNumber()}")
 		releaseGitRepo.push()
 	}
