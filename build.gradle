@@ -26,11 +26,15 @@ repositories {
     mavenCentral()
 }
 
-ext.getCurrentBuildNumber = { 
-    Properties versionProperties = new Properties() 
-	File versionPropertiesFile = new File("version.properties")
-	versionProperties.load(versionPropertiesFile.newDataInputStream()) 
-	return versionProperties.getProperty("artifactBuildNumber")
+ext {
+	getCurrentBuildNumber = { 
+	    Properties versionProperties = new Properties() 
+		File versionPropertiesFile = new File("version.properties")
+		versionProperties.load(versionPropertiesFile.newDataInputStream()) 
+		return versionProperties.getProperty("artifactBuildNumber")
+	}
+	applicationRepositoryName = 'wedding-rsvp'
+	releaseRepositoryName = 'wedding-rsvp-releases'
 }
 
 jar {
@@ -122,13 +126,17 @@ task pushJarToReleaseRepo {
 		currentBuildArtefactDirectory.mkdirs()
 		archivedBuildArtefactsDirectory.mkdirs()
 		
-		println "moving current jar(s) to archive directory"
+		println "deleting current jar"
 		currentBuildArtefactDirectory.listFiles().each { file ->
-			FileUtils.moveFileToDirectory(file, archivedBuildArtefactsDirectory, true)
+			FileUtils.deleteQuietly(file)
 		}
 		
-		println "copying freshly built jar to current directory"
+		println "copying freshly built jar to current and archive directory"
 		FileUtils.copyFileToDirectory(jars[0], currentBuildArtefactDirectory)
+		FileUtils.copyFileToDirectory(jars[0], archivedBuildArtefactsDirectory)
+		
+		println "renaming current jar to 'wedding-rsvp-current.jar'"
+		FileUtils.moveFile(new File(currentBuildArtefactDirectory.path, jars[0].name), new File(currentBuildArtefactDirectory.path, "wedding-rsvp-current.jar"))
 		
 		println "committing jar and pushing to remote"
 		releaseGitRepo.add(patterns: ['current', 'archive'])
