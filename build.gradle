@@ -10,6 +10,7 @@ buildscript {
 }
 
 apply plugin: 'java'
+apply plugin: 'groovy'
 apply plugin: 'maven'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'eclipse'
@@ -63,9 +64,15 @@ dependencies {
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-actuator'
     runtime group: 'com.h2database', name: 'h2', version:'1.4.192'
     runtime group: 'mysql', name: 'mysql-connector-java', version:'5.1.39'
+	
    	testCompile(group: 'org.springframework.boot', name: 'spring-boot-starter-test') {
 		exclude(module: 'commons-logging')
     }
+    
+    compile 'org.slf4j:slf4j-api:1.7.14'
+    compile 'org.codehaus.groovy:groovy-all:2.4.5'
+    testCompile 'org.spockframework:spock-core:1.0-groovy-2.4'
+    testCompile 'junit:junit:4.12'
 }
 
 bootRun {
