@@ -40,6 +40,10 @@ ext {
 	applicationRepositoryUrl = 'git@github.com:rcgeorge23/wedding-rsvp.git'
 	releaseRepositoryName = 'wedding-rsvp-releases'
 	releaseRepositoryUrl = 'git@github.com:rcgeorge23/wedding-rsvp-releases.git'
+	
+	gebVersion = '0.12.2'
+	seleniumVersion = '2.53.0'
+	chromeDriverVersion = '2.19'
 }
 
 jar {
@@ -73,6 +77,10 @@ dependencies {
     compile 'org.codehaus.groovy:groovy-all:2.4.5'
     testCompile 'org.spockframework:spock-core:1.0-groovy-2.4'
     testCompile 'junit:junit:4.12'
+	testCompile "org.gebish:geb-spock:$gebVersion"
+	testCompile "org.seleniumhq.selenium:selenium-chrome-driver:$seleniumVersion"  
+	testCompile "org.seleniumhq.selenium:selenium-firefox-driver:$seleniumVersion"
+	testRuntime "org.seleniumhq.selenium:selenium-support:$seleniumVersion"
 }
 
 bootRun {

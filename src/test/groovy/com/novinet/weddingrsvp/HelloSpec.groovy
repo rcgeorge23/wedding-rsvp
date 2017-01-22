@@ -1,11 +1,17 @@
 package com.novinet.weddingrsvp
 
-import spock.lang.Specification
+import geb.Browser
+import geb.spock.GebSpec
 
-class HelloSpec extends Specification {
+class HelloSpec extends GebSpec {
 
 	def "hello"() {
-		expect: 
+		given:
+		Browser browser = new Browser()
+		browser.go("http://www.google.com")
+		
+		expect:
+		browser.currentUrl == "http://www.google.com"
 		1 == 1
 	}
 }
